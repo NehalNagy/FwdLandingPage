@@ -30,7 +30,9 @@ let navItemsList=[];
  * 
 */
     //1-get all sections
-    function getAllSections(){}
+    function getAllSections(){
+        return allNavSections=document.querySelectorAll('section');
+    }
     function isSectionInView(){}
 
 
