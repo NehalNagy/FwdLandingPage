@@ -33,7 +33,15 @@ let navItemsList=[];
     function getAllSections(){
         return allNavSections=document.querySelectorAll('section');
     }
-    function isSectionInView(){}
+    function isSectionInView(sec){
+        let secPosition=sec.getBoundingClientRect();
+       return (
+        secPosition.top >= 0 &&
+        secPosition.left >= 0 &&
+        secPosition.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        secPosition.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
 
 
 /**
