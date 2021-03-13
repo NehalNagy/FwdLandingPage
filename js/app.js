@@ -17,14 +17,21 @@
  * Define Global Variables
  * 
 */
-
-
+let navItemObj={
+    itemId:'',
+    itemText:'',
+    itemTarget:'',
+    isActive:false
+}
+let navItemsList=[];
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
+    //1-get all sections
+    function getAllSections(){}
+    function isSectionInView(){}
 
 
 /**
@@ -33,11 +40,12 @@
  * 
 */
 
-// build the nav
+// 1. build the nav
+function createNavItems(){}
 
-
+//2.Toggle style of active section (in menu and in the section view)
 // Add class 'active' to section when near top of viewport
-
+function toggleActiveSection(){}
 
 // Scroll to anchor ID using scrollTO event
 
