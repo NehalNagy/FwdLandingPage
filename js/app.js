@@ -17,13 +17,6 @@
  * Define Global Variables
  * 
 */
-let navItemObj={
-    itemId:'',
-    itemText:'',
-    itemTarget:'',
-    isActive:false
-}
-let navItemsList=[];
 /**
  * End Global Variables
  * Start Helper Functions
@@ -31,7 +24,7 @@ let navItemsList=[];
 */
     //1-get all sections
     function getAllSections(){
-        return allNavSections=document.querySelectorAll('section');
+        return allNavSections=document.querySelectorAll('section');//returns NodeList
     }
     function isSectionInView(sec){
         let secPosition=sec.getBoundingClientRect();
@@ -51,7 +44,24 @@ let navItemsList=[];
 */
 
 // 1. build the nav
-function createNavItems(){}
+function createNavItems(){
+    let sections = getAllSections();
+    let unorderedList = document.getElementById('navbar__list');
+    for(section of sections){
+        let itemText=section.getAttribute('data-nav');//comes from data-nav attribute
+        let itemTarget=section.getAttribute('id');//comes from the section Id attribute
+        
+        let listItem= document.createElement('li');
+        let listItemA= document.createElement('a');
+        listItemA.innerText=itemText;
+        listItemA.setAttribute('href',`#${itemTarget}`);
+        listItemA.style.textDecoration='none';
+        listItemA.style.color='white';
+        listItem.appendChild(listItemA);
+        unorderedList.appendChild(listItem);
+        console.log("item text: "+ itemText+" item id: " + itemTarget);
+    }
+}
 
 //2.Toggle style of active section (in menu and in the section view)
 // Add class 'active' to section when near top of viewport
@@ -67,6 +77,10 @@ function toggleActiveSection(){}
 */
 
 // Build menu 
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('the DOM is ready to be interacted with!');
+    createNavItems();
+});
 
 // Scroll to section on link click
 
