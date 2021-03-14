@@ -79,6 +79,8 @@ section {
     padding: 50px;
 }
 
+
+
 .navbar__menu .menu__link {
     display: block;
     padding: 1em;
@@ -225,4 +227,11 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
+}
+a { color: inherit; } 
+/* .inactive-menu-item{
+    color: white;
+} */
+.active-menu-item{
+    color: #cc1;
 }

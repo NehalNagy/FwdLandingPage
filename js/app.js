@@ -17,6 +17,7 @@
  * Define Global Variables
  * 
 */
+let unorderedList;
 /**
  * End Global Variables
  * Start Helper Functions
@@ -46,7 +47,7 @@
 // 1. build the nav
 function createNavItems(){
     let sections = getAllSections();
-    let unorderedList = document.getElementById('navbar__list');
+     unorderedList = document.getElementById('navbar__list');
     for(section of sections){
         let itemText=section.getAttribute('data-nav');//comes from data-nav attribute
         let itemTarget=section.getAttribute('id');//comes from the section Id attribute
@@ -56,7 +57,7 @@ function createNavItems(){
         listItemA.innerText=itemText;
         listItemA.setAttribute('href',`#${itemTarget}`);
         listItemA.style.textDecoration='none';
-        listItemA.style.color='white';
+        //  listItemA.classList.add('inactive-menu-item');
         listItem.appendChild(listItemA);
         unorderedList.appendChild(listItem);
         console.log("item text: "+ itemText+" item id: " + itemTarget);
@@ -65,8 +66,18 @@ function createNavItems(){
 
 //2.Toggle style of active section (in menu and in the section view)
 // Add class 'active' to section when near top of viewport
-function toggleActiveSection(){}
+function toggleActiveSection(){
 
+}
+
+function toggleActiveMenuItem(activeItem){
+     //remove old active class
+     let oldActive=document.querySelector('.active-menu-item');
+     if(oldActive)
+      oldActive.classList.remove('active-menu-item');
+      console.log(oldActive);
+      activeItem.classList.add('active-menu-item');
+}
 // Scroll to anchor ID using scrollTO event
 
 
@@ -85,5 +96,8 @@ document.addEventListener('DOMContentLoaded', function () {
 // Scroll to section on link click
 
 // Set sections as active
+document.querySelector('#navbar__list').addEventListener('click', function (evt) {
+    toggleActiveMenuItem(evt.target);
+});
 
-
+//onclick listener for go to top button
