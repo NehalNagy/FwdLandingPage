@@ -78,7 +78,6 @@ function toggleActiveMenuItem(activeItem){
       console.log(oldActive);
       activeItem.classList.add('active-menu-item');
 }
-// Scroll to anchor ID using scrollTO event
 
 
 /**
@@ -93,11 +92,21 @@ document.addEventListener('DOMContentLoaded', function () {
     createNavItems();
 });
 
-// Scroll to section on link click
 
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
     toggleActiveMenuItem(evt.target);
 });
-
+//scroll event
+    //hide menu when scroll
+    //add circles to active section -- by using your-active-class based on which section in viewport
+    document.addEventListener('scroll',function(){
+        //1.change menu when scrolling ...
+        //check that you are not in the top of the page:
+        let headerSection = document.querySelector('.page__header');
+        headerSection.style.backgroundColor='black';
+        if(window.scrollY==0 && window.scrollX==0){
+            headerSection.style.backgroundColor='';
+          }
+    });
 //onclick listener for go to top button
