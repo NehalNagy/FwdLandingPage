@@ -59,12 +59,10 @@ function createNavItems(){
         listItemA.innerText=itemText;
         listItemA.setAttribute('href',`#${itemTarget}`);
         listItemA.style.textDecoration='none';
-        //  listItemA.classList.add('inactive-menu-item');
         listItem.appendChild(listItemA);
-       fragment.appendChild(listItem);
+        fragment.appendChild(listItem);
         console.log("item text: "+ itemText+" item id: " + itemTarget);
     }
-
     unorderedList.appendChild(fragment);
 }
 
