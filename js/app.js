@@ -48,6 +48,8 @@ let unorderedList;
 function createNavItems(){
     let sections = getAllSections();
      unorderedList = document.getElementById('navbar__list');
+     const fragment = document.createDocumentFragment(); 
+
     for(section of sections){
         let itemText=section.getAttribute('data-nav');//comes from data-nav attribute
         let itemTarget=section.getAttribute('id');//comes from the section Id attribute
@@ -59,9 +61,11 @@ function createNavItems(){
         listItemA.style.textDecoration='none';
         //  listItemA.classList.add('inactive-menu-item');
         listItem.appendChild(listItemA);
-        unorderedList.appendChild(listItem);
+       fragment.appendChild(listItem);
         console.log("item text: "+ itemText+" item id: " + itemTarget);
     }
+
+    unorderedList.appendChild(fragment);
 }
 
 //2.Toggle style of active section (in menu and in the section view)
