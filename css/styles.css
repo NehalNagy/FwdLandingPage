@@ -228,10 +228,10 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
-a { color: inherit; } 
-/* .inactive-menu-item{
-    color: white;
-} */
+a {
+     color: inherit;
+ } 
+
 .active-menu-item{
     color: #cc1;
 }

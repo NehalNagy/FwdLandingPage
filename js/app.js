@@ -18,23 +18,15 @@
  * 
 */
 let unorderedList;
+const sections=document.querySelectorAll('section');//returns NodeList;
 /**
  * End Global Variables
  * Start Helper Functions
  * 
-*/
-    //1-get all sections
-    function getAllSections(){
-        return allNavSections=document.querySelectorAll('section');//returns NodeList
-    }
+*/    
     function isSectionInView(sec){
         let secPosition=sec.getBoundingClientRect();
-       return (
-        secPosition.top >= 0 &&
-        secPosition.left >= 0 &&
-        secPosition.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        secPosition.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
+       return ( secPosition.top >= 0 );
     }
 
 
@@ -46,7 +38,6 @@ let unorderedList;
 
 // 1. build the nav
 function createNavItems(){
-    let sections = getAllSections();
      unorderedList = document.getElementById('navbar__list');
      const fragment = document.createDocumentFragment(); 
 
@@ -61,7 +52,7 @@ function createNavItems(){
         listItemA.style.textDecoration='none';
         listItem.appendChild(listItemA);
         fragment.appendChild(listItem);
-        console.log("item text: "+ itemText+" item id: " + itemTarget);
+        // console.log("item text: "+ itemText+" item id: " + itemTarget);
     }
     unorderedList.appendChild(fragment);
 }
@@ -69,6 +60,17 @@ function createNavItems(){
 //2.Toggle style of active section (in menu and in the section view)
 // Add class 'active' to section when near top of viewport
 function toggleActiveSection(){
+    console.log('in toggle active section');
+    for(section of sections){
+        // console.log("sec in viewport= "+isSectionInView(section));
+        if(isSectionInView(section)){
+            // console.log(section.innerText);
+            if(!section.classList.contains('your-active-class'))
+                section.classList.add('your-active-class');            
+        }
+        else
+            section.classList.remove('your-active-class');
+    }
 
 }
 
@@ -77,7 +79,7 @@ function toggleActiveMenuItem(activeItem){
      let oldActive=document.querySelector('.active-menu-item');
      if(oldActive)
       oldActive.classList.remove('active-menu-item');
-      console.log(oldActive);
+    //   console.log(oldActive);
       activeItem.classList.add('active-menu-item');
 }
 
@@ -89,11 +91,7 @@ function toggleActiveMenuItem(activeItem){
 */
 
 // Build menu 
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('the DOM is ready to be interacted with!');
     createNavItems();
-});
-
 
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
@@ -110,5 +108,8 @@ document.querySelector('#navbar__list').addEventListener('click', function (evt)
         if(window.scrollY==0 && window.scrollX==0){
             headerSection.style.backgroundColor='';
           }
+
+          toggleActiveSection();
     });
+    // document.addEventListener('scroll',toggleActiveSection);
 //onclick listener for go to top button
