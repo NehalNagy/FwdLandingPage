@@ -77,7 +77,7 @@ function toggleActiveSection() {
 
 }
 
-function toggleActiveMenuItem(activeItem) {
+function activateMenuItem(activeItem) {
     //remove old active class
     let oldActive = document.querySelector('.active-menu-item');
     if (oldActive)
@@ -98,7 +98,7 @@ createNavItems();
 
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
-    toggleActiveMenuItem(evt.target);
+    activateMenuItem(evt.target);
 });
 //scroll event
 //hide menu when scroll
