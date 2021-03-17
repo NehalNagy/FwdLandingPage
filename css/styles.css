@@ -244,6 +244,9 @@ a {
   }
 
 @media screen and (max-width: 600px) {
+    .page__header{
+        background-color: black;
+    }
     .navbar__menu li:not(:last-child) 
     {display: none;}
     .icon {
