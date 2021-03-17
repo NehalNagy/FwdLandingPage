@@ -242,7 +242,7 @@ a {
     .navbar__menu li {
       display: block;
     }
-    /* .page__header{
+    .page__header{
         position: initial;
-    } */
+    }
   }

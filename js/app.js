@@ -49,6 +49,8 @@ function createNavItems() {
         let itemTarget = section.getAttribute('id');//comes from the section Id attribute
 
         let listItem = document.createElement('li');
+        listItem.setAttribute('id', section.getAttribute('data-link-id'));
+
         let listItemA = document.createElement('a');
         listItemA.innerText = itemText;
         listItemA.setAttribute('href', `#${itemTarget}`);
@@ -57,6 +59,7 @@ function createNavItems() {
         fragment.appendChild(listItem);
         // console.log("item text: "+ itemText+" item id: " + itemTarget);
     }
+    fragment.firstElementChild.classList.add('active-menu-item');//the default active menu item
     unorderedList.appendChild(fragment);
 }
 
@@ -98,7 +101,9 @@ createNavItems();
 
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
-    activateMenuItem(evt.target);
+    activateMenuItem(evt.target.parentElement);
+    console.log('when click active menu item');
+    console.log(evt.target.parentElement);
 });
 //scroll event
 //hide menu when scroll
@@ -112,32 +117,35 @@ document.addEventListener('scroll', function () {
         headerSection.style.backgroundColor = '';
     }
 
-    // toggleActiveSection();
-});
-//onclick listener for go to top button
-
-
-document.addEventListener("DOMContentLoaded", () => {
     let options = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.9
+        threshold: 0.8
     };
 
     let observer = new IntersectionObserver(callback, options);
     sections.forEach(sec => {
         observer.observe(sec);
-        console.log('watching');
-        console.log(sec.querySelector('h2'));
+
     });
 });
+
 function callback(entries) {
     entries.forEach(entry => {
         entry.target.classList.remove('your-active-class');
+        let activeSec;
         if (entry.isIntersecting) {
-            console.log('intersecting!');
-            console.log(entry.target.querySelector('h2'));
-            entry.target.classList.add('your-active-class');
+            activeSec = entry.target;
+            activeSec.classList.add('your-active-class');
+
+            let menuItem = getActiveLink(activeSec);
+            activateMenuItem(menuItem);
         }
     });
+}
+
+function getActiveLink(section) {
+    let linkId = section.getAttribute('data-link-id');
+    return document.getElementById(linkId);
+
 }
