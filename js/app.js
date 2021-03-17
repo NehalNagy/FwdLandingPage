@@ -24,21 +24,12 @@ const sections = document.querySelectorAll('section');//returns NodeList;
  * Start Helper Functions
  * 
 */
-function isSectionInView(sec) {
-    console.log(sec.querySelector('h2'));
-    let secPosition = sec.getBoundingClientRect();
-    console.log('sec pos');
-    console.log(secPosition.top);
-    return (secPosition.top >= 0);
-}
-
-
 /**
  * End Helper Functions
+ * 
  * Begin Main Functions
  * 
 */
-
 // 1. build the nav
 function createNavItems() {
     unorderedList = document.getElementById('navbar__list');
@@ -57,35 +48,17 @@ function createNavItems() {
         listItemA.style.textDecoration = 'none';
         listItem.appendChild(listItemA);
         fragment.appendChild(listItem);
-        // console.log("item text: "+ itemText+" item id: " + itemTarget);
     }
     fragment.firstElementChild.classList.add('active-menu-item');//the default active menu item
     unorderedList.appendChild(fragment);
 }
 
-//2.Toggle style of active section (in menu and in the section view)
-// Add class 'active' to section when near top of viewport
-function toggleActiveSection() {
-    console.log('in toggle active section');
-    for (section of sections) {
-        // console.log("sec in viewport= "+isSectionInView(section));
-        if (isSectionInView(section)) {
-            // console.log(section.innerText);
-            if (!section.classList.contains('your-active-class'))
-                section.classList.add('your-active-class');
-        }
-        else
-            section.classList.remove('your-active-class');
-    }
-
-}
-
+//changes the style of the active menu item
 function activateMenuItem(activeItem) {
     //remove old active class
     let oldActive = document.querySelector('.active-menu-item');
     if (oldActive)
         oldActive.classList.remove('active-menu-item');
-    //   console.log(oldActive);
     activeItem.classList.add('active-menu-item');
 }
 
@@ -102,11 +75,8 @@ createNavItems();
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
     activateMenuItem(evt.target.parentElement);
-    console.log('when click active menu item');
-    console.log(evt.target.parentElement);
 });
 //scroll event
-//hide menu when scroll
 //add circles to active section -- by using your-active-class based on which section in viewport
 document.addEventListener('scroll', function () {
     //1.change menu when scrolling ...
@@ -116,13 +86,12 @@ document.addEventListener('scroll', function () {
     if (window.scrollY == 0 && window.scrollX == 0) {
         headerSection.style.backgroundColor = '';
     }
-
+    //2.check that the section in viewport using obsever interface
     let options = {
         root: null,
         rootMargin: "0px",
         threshold: 0.8
     };
-
     let observer = new IntersectionObserver(callback, options);
     sections.forEach(sec => {
         observer.observe(sec);
@@ -139,13 +108,13 @@ function callback(entries) {
             activeSec.classList.add('your-active-class');
 
             let menuItem = getActiveLink(activeSec);
-            activateMenuItem(menuItem);
+            activateMenuItem(menuItem);//changes the style of the active menu item
         }
     });
 }
 
+//searching for the active link to change its style
 function getActiveLink(section) {
     let linkId = section.getAttribute('data-link-id');
     return document.getElementById(linkId);
-
 }
