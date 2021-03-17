@@ -44,7 +44,7 @@ function createNavItems() {
 
         let listItemA = document.createElement('a');
         listItemA.innerText = itemText;
-        listItemA.setAttribute('href', `#${itemTarget}`);
+        listItemA.setAttribute('href', `#${itemTarget}`);//
         listItemA.style.textDecoration = 'none';
         listItem.appendChild(listItemA);
         fragment.appendChild(listItem);
@@ -80,8 +80,17 @@ createNavItems();
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
     let clickedItem = evt.target.parentElement; //retuns li element
+
     if (clickedItem.getAttribute('id') != 'burger-menu-anchor')// do not activate the burger menu item
+    {
+        evt.preventDefault();
+        let linkHref = evt.target.getAttribute('href');
+        console.log(linkHref);
+        let targetSec = document.getElementById(linkHref.substring(1));
+        targetSec.scrollIntoView();
         activateMenuItem(clickedItem);
+    }
+
 });
 //scroll event
 //add circles to active section -- by using your-active-class based on which section in viewport
