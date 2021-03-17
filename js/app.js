@@ -97,7 +97,7 @@ document.addEventListener('scroll', function () {
     let options = {
         root: null,
         rootMargin: "0px",
-        threshold: 0.8
+        threshold: 0.5
     };
     let observer = new IntersectionObserver(callback, options);
     sections.forEach(sec => {
