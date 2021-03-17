@@ -49,6 +49,11 @@ function createNavItems() {
         listItem.appendChild(listItemA);
         fragment.appendChild(listItem);
     }
+    let burgerMenuItem = document.createElement('li');
+    burgerMenuItem.setAttribute('id', 'burger-menu-item');
+    burgerMenuItem.innerHTML = '<a id="burger-menu-anchor" href="javascript:void(0);" class="icon" onclick="toggleBurgerMenu()"><i class="fa fa-bars"></i></a>'
+    fragment.appendChild(burgerMenuItem);
+
     fragment.firstElementChild.classList.add('active-menu-item');//the default active menu item
     unorderedList.appendChild(fragment);
 }
@@ -74,7 +79,9 @@ createNavItems();
 
 // Set sections as active
 document.querySelector('#navbar__list').addEventListener('click', function (evt) {
-    activateMenuItem(evt.target.parentElement);
+    let clickedItem = evt.target.parentElement; //retuns li element
+    if (clickedItem.getAttribute('id') != 'burger-menu-anchor')// do not activate the burger menu item
+        activateMenuItem(clickedItem);
 });
 //scroll event
 //add circles to active section -- by using your-active-class based on which section in viewport
@@ -117,4 +124,19 @@ function callback(entries) {
 function getActiveLink(section) {
     let linkId = section.getAttribute('data-link-id');
     return document.getElementById(linkId);
+}
+
+
+
+
+
+
+
+function toggleBurgerMenu() {
+    var x = document.getElementById("navbarId");
+    if (x.className === "navbar__menu") {
+        x.className += " responsive";
+    } else {
+        x.className = "navbar__menu";
+    }
 }

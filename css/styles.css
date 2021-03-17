@@ -229,7 +229,8 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
-/*My Code*/
+
+/*------------My Code*/
 a {
      color: inherit;
  } 
@@ -237,12 +238,30 @@ a {
 .active-menu-item{
     color: #cc1;
 }
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
-    .navbar__menu li {
+  
+.icon { /*burger menu icon*/
+    display: none;
+  }
+
+@media screen and (max-width: 600px) {
+    .navbar__menu li:not(:last-child) 
+    {display: none;}
+    .icon {
+      float: right;
       display: block;
     }
-    .page__header{
-        position: initial;
+  }
+  
+@media screen and (max-width: 600px) {
+    .navbar__menu.responsive {position: relative;}
+    .navbar__menu.responsive .icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .navbar__menu.responsive li {
+      float: none;
+      display: block;
+      text-align: left;
     }
   }
